@@ -1,0 +1,30 @@
+# Define the path to the JSON file
+$jsonFilePath = "path\to\your\file.json"
+
+# Define the domain to add
+$domainToAdd = "3.com"
+
+# Read the JSON file content
+$jsonContent = Get-Content -Path $jsonFilePath -Raw | ConvertFrom-Json
+
+# Check if the domain already exists in the list
+if ($jsonContent.linkTrust -notcontains $domainToAdd) {
+    # Add the domain to the list
+    $jsonContent.linkTrust += $domainToAdd
+
+    # Convert the updated object back to JSON
+    $updatedJsonContent = $jsonContent | ConvertTo-Json -Depth 10
+
+    # Write the updated JSON content back to the file
+    $updatedJsonContent | Set-Content -Path $jsonFilePath
+}
+
+Write-Output "Operation completed."
+
+
+$requiredDepth = Get-JsonDepth -Object $jsonContent
+
+$updatedJsonContent = $jsonContent | ConvertTo-Json -Depth $requiredDepth
+
+$updatedJsonContent | Set-Content -Path $jsonFilePath
+
