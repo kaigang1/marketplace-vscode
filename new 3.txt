@@ -1,0 +1,14 @@
+$jsonFilePath = "path/to/your/json/file.json"
+$newLinkedAAA = '["abc.com", "def.com", "ghi.com"]'
+
+# Load the JSON file
+$jsonData = Get-Content -Path $jsonFilePath | ConvertFrom-Json
+
+# Define the regular expression pattern to match the "linkedAAA" node
+$pattern = '"linkedAAA":\s*\[(.*?)\]'
+
+# Update the "linkedAAA" node with the new value
+$jsonData = $jsonData -replace $pattern, '"linkedAAA": ' + $newLinkedAAA
+
+# Save the updated JSON data back to the file
+$jsonData | ConvertTo-Json -Depth 100 | Set-Content -Path $jsonFilePath
