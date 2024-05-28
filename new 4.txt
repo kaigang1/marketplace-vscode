@@ -1,0 +1,33 @@
+# Prompt the user to choose an option
+Write-Host "Please choose below 2 items:"
+Write-Host "1. OpenVSX"
+Write-Host "2. VS Code"
+
+# Get user input
+$userInput = Read-Host "Enter your choice (1 or 2)"
+
+# Validate the user input
+while ($userInput -ne "1" -and $userInput -ne "2") {
+    Write-Host "Invalid input. Please enter 1 or 2."
+    $userInput = Read-Host "Enter your choice (1 or 2)"
+}
+
+# Call the appropriate function based on the user's choice
+if ($userInput -eq "1") {
+    Func_1
+}
+else {
+    Func_2
+}
+
+# Function 1
+function Func_1 {
+    # Add the code for function 1 here
+    Write-Host "You chose OpenVSX."
+}
+
+# Function 2
+function Func_2 {
+    # Add the code for function 2 here
+    Write-Host "You chose VS Code."
+}
